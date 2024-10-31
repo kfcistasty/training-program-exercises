@@ -47,7 +47,8 @@ export function Login() {
          */
 
         // Add your code here!!! 
-
+        localStorage.setItem("gID", res.data.gID);
+        localStorage.setItem("USER_TYPE", res.data.user_type);
         ///// DO NOT CHANGE BELOW!! ////
         setError(false);
         navigate("/home");

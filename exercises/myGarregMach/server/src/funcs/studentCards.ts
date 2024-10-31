@@ -48,7 +48,15 @@ export async function studentCards() : Promise<StudentCardsReturn> {
    * 
    */
 
+  const db = getDb();
+  const querySnapshot = await getDocs(collection(db, 'students'))   
+  const queryData: StudentCard[] = [];
+
+  querySnapshot.forEach((doc) => {
+    queryData.push(doc.data() as StudentCard);
+  });
+
   return { 
-    studentCards: [] 
+    studentCards: queryData 
   };
 }

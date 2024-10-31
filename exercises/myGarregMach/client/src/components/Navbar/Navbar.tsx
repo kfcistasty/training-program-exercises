@@ -14,7 +14,7 @@ export function Navbar() {
      */
 
     // ADD YOUR CODE HERE!!!
-
+    localStorage.clear();
     // DO NOT CHANGE CODE BELOW!! //
   }
 

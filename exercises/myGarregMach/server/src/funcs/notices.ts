@@ -51,8 +51,15 @@ export async function notices() : Promise<NoticeReturn> {
    * However, you will need to refresh the frontend! 
    * 
    */
+  const db = getDb();
+  const querySnapshot = await getDocs(collection(db, 'notices'))   
+  const queryData: Notice[] = [];
+
+  querySnapshot.forEach((doc) => {
+    queryData.push(doc.data() as Notice);
+  });
 
     return {
-      notices: []
+      notices: queryData
     };
 }

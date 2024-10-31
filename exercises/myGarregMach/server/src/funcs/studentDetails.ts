@@ -55,18 +55,24 @@ export async function studentDetails(gID: string) : Promise<StudentDetailsReturn
    * make a change to the backend.
    * 
    */
+  const querySnapshot = await getDocs(query(collection(getDb(), 'students'), where('gID', '==', gID), limit(1)));
+
+  if (querySnapshot.empty) {
+    throw new Error(`Student with gID ${gID} not found.`);
+  }
 
   return {
-    student: {
-      gID: '0000000',
+    student: querySnapshot.docs[0].data() as Student
+
+      /*{gID: '0000000',
       name: 'NO_NAME',
       degree: 'NULL',
       house: 'black_eagles',
       profileUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1024px-Default_pfp.svg.png',
       password: 'password',
       user_type: 'STUDENT',
-      subjects: []
-    }
+      subjects: []}*/
+    
   }
 
 }
